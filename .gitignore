@@ -1,0 +1,89 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+.env
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Pytest / coverage / reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Replit config
+.replit
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs / temp files
+*.log
+*.pot
+*.mo
+*.tmp
+*.temp*.bak
+*.orig
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Lock files
+uv.lock
+poetry.lock
+Pipfile.lock
+
+# Attached assets
+attached_assets/
+
+# Local replit environment
+.local/
+

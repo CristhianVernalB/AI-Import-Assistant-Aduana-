@@ -1,0 +1,15 @@
+[project]
+name = "ai-import-assistant"
+version = "0.1.0"
+description = "Script automatizado en Python para la extracción inteligente y procesamiento de datos críticos contenidos en documentos de transporte marítimo (Bill of Lading) y facturas comerciales."
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.109.1",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.2",
+    "pillow>=11.3.0",
+    "psycopg2-binary>=2.9.10",
+    "pypdf2>=3.0.1",
+    "python-magic>=0.4.27",
+    "streamlit>=1.50.0",
+]
