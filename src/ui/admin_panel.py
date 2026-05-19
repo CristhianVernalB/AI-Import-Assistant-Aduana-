@@ -1,11 +1,6 @@
 """
 Módulo de panel de administración para gestionar usuarios y sesiones.
-"""
-import streamlit as st
-import pandas as pd
-from datetime import datetime
-"""
-Módulo de panel de administración para gestionar usuarios y sesiones.
+Este archivo contiene la lógica de administración libre de emojis.
 """
 import streamlit as st
 from ..auth.auth_manager import AuthManager
@@ -16,14 +11,14 @@ from datetime import datetime
 
 def show_admin_panel():
     """Muestra el panel de administración."""
-    st.header("⚙️ Panel de Administración")
+    st.header("Panel de Administración")
     
     # Tabs principales
     tab1, tab2, tab3 = st.tabs(["Gestión de Usuarios", "Gestión de Sesiones", "Reportes"])
     
     # === GESTIÓN DE USUARIOS ===
     with tab1:
-        st.subheader("👥 Gestión de Usuarios")
+        st.subheader("Gestión de Usuarios")
         
         auth_manager = AuthManager()
         workers = auth_manager.get_all_workers()
@@ -63,7 +58,7 @@ def show_admin_panel():
                         
                         with col_name:
                             st.write(f"**{worker['username']}**")
-                            st.caption(f"📧 {worker['email']}")
+                            st.caption(f"Email: {worker['email']}")
                             st.caption(f"Rol: {worker['role'].upper()}")
                         
                         with col_actions:
@@ -91,7 +86,7 @@ def show_admin_panel():
                                             st.rerun()
                             
                             with col_opt2:
-                                if st.button("🗑️ Desactivar", key=f"deactivate_{worker['id']}", use_container_width=True):
+                                if st.button("Desactivar", key=f"deactivate_{worker['id']}", use_container_width=True):
                                     result = auth_manager.deactivate_user(worker['id'])
                                     if "success" in result:
                                         st.success("Usuario desactivado")
@@ -101,7 +96,7 @@ def show_admin_panel():
     
     # === GESTIÓN DE SESIONES ===
     with tab2:
-        st.subheader("📋 Gestión de Sesiones de Trabajo")
+        st.subheader("Gestión de Sesiones de Trabajo")
         
         session_manager = SessionManagerExtended()
         all_sessions = session_manager.get_all_sessions()
@@ -145,20 +140,14 @@ def show_admin_panel():
                         if session['assigned_to_name']:
                             st.caption(f"Asignada a: {session['assigned_to_name']}")
                         else:
-                            st.caption("Asignada a: *Sin asignar*")
+                            st.caption("Asignada a: Sin asignar")
                         
-                        st.caption(f"📅 {session['created_at'].strftime('%d/%m/%Y %H:%M')}")
+                        st.caption(f"Fecha: {session['created_at'].strftime('%d/%m/%Y %H:%M')}")
                     
                     with col2:
-                        status_color = {
-                            'in_progress': '🔵',
-                            'completed': '✅',
-                            'error': '❌',
-                            'paused': '⏸️'
-                        }
-                        st.write(f"{status_color.get(session['processing_status'], '❓')} {session['processing_status'].upper()}")
-                        st.write(f"📄 {session['total_documents']} docs")
-                        st.write(f"⚠️ {session['documents_with_errors']} errores")
+                        st.write(f"Estado: {session['processing_status'].upper()}")
+                        st.write(f"Documentos: {session['total_documents']}")
+                        st.write(f"Errores: {session['documents_with_errors']}")
                     
                     with col3:
                         if st.button("Ver Detalles", key=f"session_detail_{session['id']}", use_container_width=True):
@@ -211,7 +200,7 @@ def show_admin_panel():
                         if history:
                             st.write("**Historial de asignaciones:**")
                             for assignment in history:
-                                st.caption(f"📌 {assignment['assigned_at'].strftime('%d/%m/%Y %H:%M')} - Asignado a {assignment['assigned_to']} por {assignment['assigned_by']}")
+                                st.caption(f"{assignment['assigned_at'].strftime('%d/%m/%Y %H:%M')} - Asignado a {assignment['assigned_to']} por {assignment['assigned_by']}")
                                 if assignment['notes']:
                                     st.caption(f"Notas: {assignment['notes']}")
         else:
@@ -219,7 +208,7 @@ def show_admin_panel():
     
     # === REPORTES ===
     with tab3:
-        st.subheader("📊 Reportes")
+        st.subheader("Reportes")
         
         session_manager = SessionManagerExtended()
         
@@ -259,7 +248,7 @@ def show_admin_panel():
 
 def show_worker_dashboard():
     """Muestra el dashboard de un trabajador."""
-    st.header("📊 Mi Dashboard")
+    st.header("Mi Dashboard")
     
     session_manager = SessionManagerExtended()
     
@@ -283,7 +272,7 @@ def show_worker_dashboard():
     st.divider()
     
     # Mis sesiones
-    st.subheader("📋 Mis Sesiones")
+    st.subheader("Mis Sesiones")
     
     my_sessions = session_manager.get_user_sessions(st.session_state.user_id)
     
@@ -296,7 +285,7 @@ def show_worker_dashboard():
                     st.write(f"**{session['session_name']}**")
                     st.caption(f"Creada: {session['created_at'].strftime('%d/%m/%Y %H:%M')}")
                     st.caption(f"Estado: {session['processing_status'].upper()}")
-                    st.caption(f"📄 {session['total_documents']} documentos | ⚠️ {session['documents_with_errors']} errores")
+                    st.caption(f"Documentos: {session['total_documents']} | Errores: {session['documents_with_errors']}")
                 
                 with col2:
                     if st.button("Abrir", key=f"open_session_{session['id']}", use_container_width=True):

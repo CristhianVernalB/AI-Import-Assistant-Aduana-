@@ -154,10 +154,10 @@ CREATE INDEX IF NOT EXISTS idx_assignments_assigned_at ON session_assignments(as
 -- FIN DEL SCRIPT
 -- ============================================================================
 -- Si todo se ejecutó correctamente, deberías ver:
--- ✅ Extension "uuid-ossp" creada
--- ✅ Tabla "users" creada
--- ✅ Tabla "work_sessions" creada
--- ✅ Tabla "session_documents" creada
--- ✅ Tabla "session_assignments" creada
--- ✅ Índices creados
+-- - Extension "uuid-ossp" creada
+-- - Tabla "users" creada
+-- - Tabla "work_sessions" creada
+-- - Tabla "session_documents" creada
+-- - Tabla "session_assignments" creada
+-- - Índices creados
 -- ============================================================================

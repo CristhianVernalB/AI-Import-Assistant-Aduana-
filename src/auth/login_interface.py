@@ -1,6 +1,6 @@
 """
 Módulo de interfaz de login para Streamlit.
-Maneja la pantalla de autenticación y registro de usuarios.
+Maneja la pantalla de autenticación y registro de usuarios sin emojis.
 """
 import streamlit as st
 from .auth_manager import AuthManager
@@ -15,7 +15,7 @@ def show_login_page():
     
     with col2:
         st.image("https://via.placeholder.com/300x100?text=Logo+Empresa", use_column_width=True)
-        st.title("🔐 Asistente de Importaciones IA")
+        st.title("Asistente de Importaciones IA")
         st.subheader("Sistema de Gestión de Documentos")
         
         # Tabs para Login y Registro
@@ -25,8 +25,8 @@ def show_login_page():
         with tab1:
             st.write("Ingresa tus credenciales para acceder al sistema")
             
-            username = st.text_input("👤 Usuario", key="login_username")
-            password = st.text_input("🔑 Contraseña", type="password", key="login_password")
+            username = st.text_input("Usuario", key="login_username")
+            password = st.text_input("Contraseña", type="password", key="login_password")
             
             if st.button("Iniciar Sesión", use_container_width=True, type="primary"):
                 if not username or not password:
@@ -45,24 +45,24 @@ def show_login_page():
                         st.balloons()
                         st.rerun()
                     else:
-                        st.error("❌ Usuario o contraseña incorrectos")
+                        st.error("Usuario o contraseña incorrectos")
         
         # === TAB DE REGISTRO ===
         with tab2:
             st.write("**Solo administradores pueden crear nuevas cuentas de usuario**")
             
-            admin_password = st.text_input("🔐 Contraseña de Administrador", type="password", key="admin_password")
+            admin_password = st.text_input("Contraseña de Administrador", type="password", key="admin_password")
             
             if admin_password:  # Solo mostrar campos si ingresa contraseña admin
                 if admin_password == "admin123":  # CAMBIAR ESTO EN PRODUCCIÓN
-                    st.success("✅ Acceso de administrador confirmado")
+                    st.success("Acceso de administrador confirmado")
                     
-                    new_username = st.text_input("👤 Nuevo Usuario", key="new_username")
-                    new_email = st.text_input("📧 Email", key="new_email")
-                    new_password = st.text_input("🔑 Contraseña", type="password", key="new_password")
-                    new_password_confirm = st.text_input("🔑 Confirmar Contraseña", type="password", key="new_password_confirm")
+                    new_username = st.text_input("Nuevo Usuario", key="new_username")
+                    new_email = st.text_input("Email", key="new_email")
+                    new_password = st.text_input("Contraseña", type="password", key="new_password")
+                    new_password_confirm = st.text_input("Confirmar Contraseña", type="password", key="new_password_confirm")
                     
-                    user_role = st.selectbox("👨‍💼 Rol del Usuario", ["worker", "admin"])
+                    user_role = st.selectbox("Rol del Usuario", ["worker", "admin"])
                     
                     if st.button("Crear Usuario", use_container_width=True, type="primary"):
                         if not all([new_username, new_email, new_password, new_password_confirm]):
@@ -76,15 +76,15 @@ def show_login_page():
                             result = auth_manager.create_user(new_username, new_email, new_password, user_role)
                             
                             if "success" in result:
-                                st.success(f"✅ Usuario '{new_username}' creado exitosamente")
+                                st.success(f"Usuario '{new_username}' creado exitosamente")
                                 st.info(f"Rol: {user_role}")
                             else:
-                                st.error(f"❌ Error: {result.get('error', 'Error desconocido')}")
+                                st.error(f"Error: {result.get('error', 'Error desconocido')}")
                 else:
-                    st.error("❌ Contraseña de administrador incorrecta")
+                    st.error("Contraseña de administrador incorrecta")
         
         st.divider()
-        st.caption("🔒 Sistema seguro. Tus datos están protegidos.")
+        st.caption("Sistema seguro. Tus datos están protegidos.")
 
 
 def check_authentication():
@@ -124,9 +124,9 @@ def show_user_menu():
         col1, col2, col3 = st.columns([2, 1, 1])
         
         with col1:
-            st.write(f"👤 **{st.session_state.username}**")
+            st.write(f"**{st.session_state.username}**")
             st.caption(f"Rol: {st.session_state.user_role.upper()}")
         
         with col3:
-            if st.button("🚪 Cerrar Sesión", use_container_width=True):
+            if st.button("Cerrar Sesión", use_container_width=True):
                 logout()
